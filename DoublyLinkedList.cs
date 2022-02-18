@@ -75,4 +75,29 @@ public class DoublyLinkedList<TData> : IEnumerable<TData>
 
         return null;
     }
+
+    public bool Contains(TData data)
+    {
+        return Find(data) != null;
+    }
+
+    public IEnumerator<TData> GetEnumerator()
+    {
+        var node = _head;
+        if (_head == null)
+        {
+            yield break;
+        }
+
+        while (node != null && node.Data != null)
+        {
+            yield return node.Data;
+            node = node.Next;
+        }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return GetEnumerator();
+    }
 }
